@@ -24,7 +24,7 @@ class ConnectionChecker:
         try:
             # Выполняем команду ping с 1 пакетом
             response = subprocess.run(
-                ["ping", "-c", "1", ip],  # Пинг 1 пакет
+                ["ping", "-c", "2", ip],  # Пинг 2 пакета
                 stdout=subprocess.PIPE,  # Захватываем вывод команды
                 stderr=subprocess.PIPE
             )
