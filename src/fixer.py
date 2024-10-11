@@ -44,15 +44,19 @@ class FixRouterProblem:
             return self
         except KeyboardInterrupt:
             pass
+        finally:
+            self._free_up_resources()
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         return True
+
+    def _free_up_resources(self):
+        if hasattr(self, '_browser') and self._browser:
+            self._browser.close_browser()
 
     def _exit_callback(self, signum, frame):
         """
         Метод для обработки прерывания через горячую клавишу (Ctrl+C).
         """
         self._outer_logger.info("\n\nInterrupt signal received. Exiting...")
-        if hasattr(self, '_browser') and self._browser:
-            self._browser.close_browser()
         raise KeyboardInterrupt
