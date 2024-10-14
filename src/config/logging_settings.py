@@ -37,7 +37,7 @@ logging_config = {
     "loggers": {
         "outer": {
             "handlers": ["outer_handler"],
-            "level": "INFO",
+            "level": "DEBUG",
             "propagate": False
         }
     },
