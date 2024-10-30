@@ -110,6 +110,11 @@ class Router:
         try:
             self._logger.debug("Reconnection attempt...")
             self._switch_to_frame(Frame.MAIN)
+
+            if self._is_element_present(Button.CONNECTING):
+                self._outer_logger.info("   No connecting...\n")
+                return False
+
             if self._is_element_present(Button.DISCONNECT):
                 self._click_to(Button.DISCONNECT)
                 self._outer_logger.info("   PPPoE connection disabled.")

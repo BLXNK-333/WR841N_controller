@@ -11,6 +11,7 @@ class Button(StrEnum):
     REBOOT = "reboot"
     CONNECT = "Connect"
     DISCONNECT = "Disconnect"
+    CONNECTING = "t_connecting"
 
 
 class TAB(StrEnum):

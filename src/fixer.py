@@ -16,8 +16,8 @@ class FixRouterProblem:
             signal.signal(signal.SIGINT, self._exit_callback)
 
             connection_checker = ConnectionChecker()
-            if connection_checker.check_connection():
-                return self
+            # if connection_checker.check_connection():
+            #     return self
 
             self._browser = Browser()
             router = Router(
