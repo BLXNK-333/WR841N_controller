@@ -29,6 +29,7 @@ class FixRouterProblem:
 
             router.reconnect()
             if connection_checker.check_connection():
+                router.exit()
                 return self
 
             router.reboot()

@@ -71,7 +71,7 @@ class Router:
         alert = self._driver.switch_to.alert
         alert.accept() if action else alert.dismiss()
 
-    def _exit(self) -> None:
+    def exit(self) -> None:
         """
         Реализует логику де_авторизации.
         """
@@ -123,7 +123,6 @@ class Router:
                 self._click_to(Button.CONNECT)
                 self._outer_logger.info("   PPPoE connection enabled.\n")
 
-            self._exit()
             return True
 
         except Exception as e:
