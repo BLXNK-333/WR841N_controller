@@ -19,3 +19,7 @@ class TAB(StrEnum):
     SYSTEM_TOOLS = "a44"
     REBOOT = "a50"
 
+
+class IP(StrEnum):
+    ROUTER = "192.168.0.1"
+    INTERNET = "8.8.8.8"

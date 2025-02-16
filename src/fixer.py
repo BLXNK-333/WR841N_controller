@@ -4,6 +4,7 @@ from logging import getLogger
 from .utils.connection import ConnectionChecker
 from .utils.browser import Browser
 from .utils.router import Router
+from .entities import IP
 
 
 class FixRouterProblem:
@@ -16,8 +17,21 @@ class FixRouterProblem:
             signal.signal(signal.SIGINT, self._exit_callback)
 
             connection_checker = ConnectionChecker()
-            # if connection_checker.check_connection():
-            #     return self
+            if not connection_checker.check_connection(ip=IP.ROUTER):
+                return self
+
+            if connection_checker.check_connection(ip=IP.INTERNET):
+                self._outer_logger.warning(
+                    "   Internet connection is active. If you want to forcibly continue\n"
+                    "   the FIX process, type 'y' and press Enter. To exit, press any\n"
+                    "   other key.\n"
+                )
+                user_input = input("   Your choice (y/n): ").strip().lower()
+                print()
+                if user_input == 'y':
+                    pass
+                else:
+                    return self
 
             self._browser = Browser()
             router = Router(
@@ -28,12 +42,12 @@ class FixRouterProblem:
                 return self
 
             router.reconnect()
-            if connection_checker.check_connection():
+            if connection_checker.check_connection(ip=IP.INTERNET):
                 router.exit()
                 return self
 
             router.reboot()
-            if connection_checker.check_connection(reboot_waiting=True):
+            if connection_checker.check_connection(ip=IP.INTERNET, reboot_waiting=True):
                 return self
 
             self._logger.warning(
